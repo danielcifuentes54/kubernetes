@@ -1,0 +1,40 @@
+#Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-deploy
+  labels:
+    tier: frontend2
+    env: production2
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      tier: frontend3
+      env: production3
+  template:
+    metadata:
+      labels:
+        tier: frontend3
+        env: production3
+    spec:
+      containers:
+        - name: nginx
+          image: nginx
+
+---
+#service
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-service
+spec:
+  type: NodePort
+  selector:
+    tier: frontend3
+    env: production3
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 32767

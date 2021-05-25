@@ -1,14 +1,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: deploy-example-2
+  name: deploy-example
   labels:
-    name: example-2
+    name: example
 spec:
   replicas: 10
   selector:
     matchLabels:
-      name: example-2
+      name: example-deploy
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -17,11 +17,11 @@ spec:
   template:
     metadata:
       labels:
-        name: example-2
+        name: example-deploy
     spec:
       containers:
-      - image: mmorejon/erase-una-vez-1:0.2.0
-        name: erase-una-vez-1
+      - image: redis
+        name: redis-example
         env:
-          - name: CHARACTER
-            value: "un elfo."
+          - name: SOME_ENV
+            value: "Hello WORLD"
