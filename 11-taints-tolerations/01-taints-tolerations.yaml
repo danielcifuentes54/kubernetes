@@ -1,0 +1,16 @@
+# kubectl taint nodes node01 spray=mortein:NoSchedule
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: bee
+  name: bee
+spec:
+  containers:
+    - image: nginx
+      name: bee
+  tolerations:
+    - effect: "NoSchedule"
+      key: "spray"
+      operator: "Equal"
+      value: "mortein"
