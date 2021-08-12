@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    name: app
+  name: app
+  namespace: elastic-stack
+spec:
+  containers:
+    - image: kodekloud/event-simulator
+      imagePullPolicy: Always
+      name: app
+      volumeMounts:
+        - mountPath: /log
+          name: log-volume
+        - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+          name: default-token-thgk4
+          readOnly: true
+    - image: kodekloud/filebeat-configured
+      name: sidecar
+      volumeMounts:
+        - mountPath: /var/log/event-simulator/
+          name: log-volume
+  volumes:
+    - name: log-volume
+      emptyDir: {}
