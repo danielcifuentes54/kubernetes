@@ -1,0 +1,59 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+  name: frontend-deployment
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    spec:
+      containers:
+      - image: kodekloud/webapp-color:v1
+        name: webapp-color
+    metadata:
+      labels:
+        app: frontend
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+  name: frontend-deployment-v2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    spec:
+      containers:
+      - image: kodekloud/webapp-color:v2
+        name: webapp-color
+    metadata:
+      labels:
+        app: frontend
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+  name: frontend-service
+spec:
+  ports:
+  - name: "30000"
+    port: 30000
+    nodePort: 30000
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: frontend
+  type: NodePort

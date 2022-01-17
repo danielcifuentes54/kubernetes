@@ -1,15 +1,3 @@
----
-kind: Role
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  namespace: blue
-  name: deploy-role
-rules:
-  - apiGroups: ["apps", "extensions"]
-    resources: ["deployments"]
-    verbs: ["create"]
-
----
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
