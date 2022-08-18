@@ -25,6 +25,7 @@
 > Delete an object from a resource.
 > - kubectl delete <RESOURCE_NAME> <OBJECT_NAME>
 >   - `kubectl delete pod nginx`
+>   - `kubectl delete pod nginx --grace-period=0 --force`
 
 
 ## Pods (Pod)
@@ -198,6 +199,10 @@
 > -  kubectl config use-context <CONTEXT_NAME>
 >   - `kubectl config use-context dev-user@development`
 
+> Set credentials
+> -  kubectl config set-credentials <USER_NAME> --client-certificate <CRT_PATH> --client-key <KEY_PATH>
+>   - `kubectl config set-credentials drogo --client-certificate /root/drogo.crt --client-key /root/drogo.key`
+
 ## role
 
 > create role
@@ -257,4 +262,4 @@
 
 > Change API version of a yaml file
 > kubectl convert -f <PATH_OLD_FILE> --output-version <NEW_VERSION>
-> - `k convert -f ingress-old.yaml --output-version networking.k8s.io/v1`
+> - `kubectl convert -f ingress-old.yaml --output-version networking.k8s.io/v1`
